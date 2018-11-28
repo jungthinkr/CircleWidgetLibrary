@@ -13,9 +13,9 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
-    <com.jungthinkr.aaronl.circlewidgetlibrary.CircleWidgetView
+    <com.jungthinkr.aaronl.circlewidgetlibrary.CircleWidget
             android:layout_width="50dp"
             android:layout_height="50dp">
 
-    </com.jungthinkr.aaronl.circlewidgetlibrary.CircleWidgetView>
+    </com.jungthinkr.aaronl.circlewidgetlibrary.CircleWidget>
 </android.support.constraint.ConstraintLayout>
