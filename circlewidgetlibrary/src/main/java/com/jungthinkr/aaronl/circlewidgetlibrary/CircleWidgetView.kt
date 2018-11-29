@@ -31,7 +31,6 @@ class CircleWidgetView @JvmOverloads constructor(
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_MOVE -> {
-
             }
 
         }
