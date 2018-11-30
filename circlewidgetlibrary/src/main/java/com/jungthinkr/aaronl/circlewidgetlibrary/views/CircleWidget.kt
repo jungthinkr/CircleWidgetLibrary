@@ -1,10 +1,12 @@
-package com.jungthinkr.aaronl.circlewidgetlibrary
+package com.jungthinkr.aaronl.circlewidgetlibrary.views
 
 import android.content.Context
 import android.support.annotation.AttrRes
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.view.View
 import android.widget.FrameLayout
+import com.jungthinkr.aaronl.circlewidgetlibrary.tools.CircleWidgetOnTouchListener
 
 internal class CircleWidget @JvmOverloads constructor(
     private val circleWidgetListener: CircleWidgetListener,
@@ -14,23 +16,9 @@ internal class CircleWidget @JvmOverloads constructor(
 
     interface CircleWidgetListener {
         fun onWidgetClick()
-        fun onWidgetActionDown()
-        fun onWidgetActionUp()
     }
 
     init {
         setOnClickListener { circleWidgetListener.onWidgetClick() }
-    }
-
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        when (event.action) {
-            MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN -> {
-                circleWidgetListener.onWidgetActionDown()
-            }
-            MotionEvent.ACTION_POINTER_UP, MotionEvent.ACTION_UP -> {
-                circleWidgetListener.onWidgetActionUp()
-            }
-        }
-        return super.onTouchEvent(event)
     }
 }
