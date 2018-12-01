@@ -1,5 +1,6 @@
 package com.jungthinkr.aaronl.circlewidgetlibrary.tools
 
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.GestureDetector
@@ -26,11 +27,30 @@ class CircleWidgetOnTouchListener(val view: WeakReference<View>) : View.OnTouchL
         }
 
         override fun onScroll(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
-            (view.get()?.parent as? View).let {
-                it?.y + it?.width?: 0
+            val view = if (view.get() != null) view.get() else null
+            if (view != null) {
+                val transX = e2.rawX - mMotionDownX
+                val transY = e2.rawY - mMotionDownY
+                val parentAsView = view.parent as? View
+
+                when {
+                    transX <= 0 ->
+                        view.translationX = 0f
+                    transX + view.width >= parentAsView?.width ?: 0 ->
+                        view.translationX = (parentAsView?.width?.toFloat() ?: 0f) - view.width.toFloat()
+                    else ->
+                        view.translationX = e2.rawX - mMotionDownX
+                }
+
+                when {
+                    transY <= 0 ->
+                        view.translationY = 0f
+                    transY + view.height >= parentAsView?.height ?: 0 ->
+                        view.translationY = (parentAsView?.height?.toFloat() ?: 0f) - view.height.toFloat()
+                    else ->
+                        view.translationY = e2.rawY - mMotionDownY
+                }
             }
-            view.get()?.translationX = e2.rawX - mMotionDownX
-            view.get()?.translationY = e2.rawY - mMotionDownY
             return true
         }
     }
@@ -44,6 +64,12 @@ class CircleWidgetOnTouchListener(val view: WeakReference<View>) : View.OnTouchL
     }
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
+        when(event.action) {
+            MotionEvent.ACTION_OUTSIDE ->
+                Log.e("outside", event.action.toString())
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP, MotionEvent.ACTION_CANCEL ->
+                Log.e("uptouchevent", event.action.toString())
+        }
         return mGestureDetector.onTouchEvent(event)
     }
 }
