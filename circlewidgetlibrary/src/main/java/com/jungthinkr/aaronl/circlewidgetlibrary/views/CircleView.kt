@@ -8,11 +8,13 @@ import android.view.View
 import android.widget.FrameLayout
 import com.jungthinkr.aaronl.circlewidgetlibrary.tools.CircleWidgetOnTouchListener
 
-internal class CircleWidget @JvmOverloads constructor(
+//Circle width
+internal class CircleView @JvmOverloads constructor(
     private val circleWidgetListener: CircleWidgetListener,
     context: Context,
     attrs: AttributeSet? = null, @AttrRes defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
+
 
     interface CircleWidgetListener {
         fun onWidgetClick()
@@ -20,5 +22,6 @@ internal class CircleWidget @JvmOverloads constructor(
 
     init {
         setOnClickListener { circleWidgetListener.onWidgetClick() }
+        setOnTouchListener(CircleWidgetOnTouchListener(this))
     }
 }

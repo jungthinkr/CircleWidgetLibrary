@@ -1,4 +1,4 @@
-package com.jungthinkr.aaronl.circlewidget
+package com.circlewidget.example
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -17,8 +17,5 @@ import org.junit.Assert.*
 class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.jungthinkr.aaronl.circlewidgetlibrary", appContext.packageName)
     }
 }
